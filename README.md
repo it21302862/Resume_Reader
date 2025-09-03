@@ -11,6 +11,12 @@ A server for managing and chatting with your CVs, with email notifications when 
 - **Email Notifications:** Receive emails when a CV has been successfully processed.  
 - **Optional Frontend:** Minimal Next.js frontend to view CVs, chat, and manage uploads.
 
+## UI Front View
+![CV List View](https://github.com/it21302862/Resume_Reader/blob/main/public/screenshots/PdfList.png)
+![CV Upload View](https://github.com/it21302862/Resume_Reader/blob/main/public/screenshots/PdfUploader.png)
+![CV Reader View](https://github.com/it21302862/Resume_Reader/blob/main/public/screenshots/CvReader.png)
+![Mail Recieved View](https://github.com/it21302862/Resume_Reader/blob/main/public/screenshots/mailsender.png)
+
 ---
 
 ## Directory Structure
