@@ -16,6 +16,7 @@ A server for managing and chatting with your CVs, with email notifications when 
 ![CV List View](https://github.com/it21302862/Resume_Reader/blob/main/public/screenshots/PdfList.png)
 ![CV Reader View](https://github.com/it21302862/Resume_Reader/blob/main/public/screenshots/CvReader.png)
 ![Mail Recieved View](https://github.com/it21302862/Resume_Reader/blob/main/public/screenshots/mailsender.png)
+![ Preview](https://github.com/it21302862/Resume_Reader/blob/main/public/screenshots/Preview.png)
 
 ---
 
