@@ -47,8 +47,27 @@ async function generateThumbnail(pdfPath: string, outputPath: string): Promise<b
       height: 280,
     });
 
-    await convert(1, { responseType: 'image' }); 
-    return fs.existsSync(outputPath);
+    await convert(1);
+
+    if (fs.existsSync(outputPath)) return true;
+
+    const dir = path.dirname(outputPath);
+    const base = path.parse(outputPath).name;
+    const candidates = fs
+      .readdirSync(dir)
+      .filter((f) => f.startsWith(base) && f.toLowerCase().endsWith('.png'))
+      .map((f) => path.join(dir, f));
+
+    if (candidates.length > 0) {
+      const byMtimeDesc = candidates
+        .map((p) => ({ p, m: fs.statSync(p).mtimeMs }))
+        .sort((a, b) => b.m - a.m);
+      const latest = byMtimeDesc[0].p;
+      fs.copyFileSync(latest, outputPath);
+      return true;
+    }
+
+    return false;
   } catch (error: unknown) {
     console.error('Thumbnail generation failed:', error);
     return false;

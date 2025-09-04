@@ -162,20 +162,26 @@ export default function CvLibraryPage() {
               {formatted.map((cv) => (
                 <div key={cv.id} className="card p-4 flex flex-col gap-3">
                   {/* Thumbnail Preview */}
-                  <div className="flex justify-center">
-                    {cv.hasThumbnail ? (
-                      <img
-                        src={`/cvs/${cv.id}.png`}
-                        alt={`${cv.name} preview`}
-                        className="w-32 h-44 object-cover border border-slate-200 rounded shadow-sm"
-                      />
-                    ) : (
-                      <div className="w-32 h-44 bg-slate-100 border border-slate-200 rounded flex items-center justify-center">
-                        <span className="text-slate-400 text-xs">
-                          No preview
-                        </span>
-                      </div>
-                    )}
+                  <div className="relative w-full">
+                    <div className="relative w-full pt-[140%] overflow-hidden rounded border border-slate-200 shadow-sm bg-white">
+                      {cv.hasThumbnail ? (
+                        <img
+                          src={`/cvs/${cv.id}.png`}
+                          alt={`${cv.name} preview`}
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+                      ) : (
+                        <object
+                          data={`/cvs/${cv.id}.pdf#page=1&view=FitH`}
+                          type="application/pdf"
+                          className="absolute inset-0 w-full h-full"
+                        >
+                          <div className="absolute inset-0 flex items-center justify-center bg-slate-100">
+                            <span className="text-slate-400 text-xs">No preview</span>
+                          </div>
+                        </object>
+                      )}
+                    </div>
                   </div>
 
                   {/* CV Info */}
