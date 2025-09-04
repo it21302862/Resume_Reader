@@ -1,3 +1,4 @@
+// components/HomeClient.tsx
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -5,8 +6,8 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
 export default function HomeClient() {
-  const params = useSearchParams();
-  const selectedCv = params?.get('cv') || '';
+  const searchParams = useSearchParams();
+  const selectedCv = searchParams?.get('cv') || '';
 
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
