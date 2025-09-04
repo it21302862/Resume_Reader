@@ -56,7 +56,8 @@ export async function POST(req: NextRequest) {
     try {
       console.log("[chat] Looking for resume at:", resumePath);
       resumeText = await parseResume(resumePath);
-    } catch (e) {
+    } catch {
+      // removed unused variable `e`
       return NextResponse.json(
         {
           error:
@@ -128,14 +129,17 @@ Question: ${question}`;
     res.headers.set("X-Content-Type-Options", "nosniff");
     res.headers.set("Referrer-Policy", "no-referrer");
     return res;
-  } catch (error: any) {
-    console.error(
-      "[chat] Error:",
-      error?.response?.data || error?.message || error
-    );
+  } catch (error: unknown) {
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: "Invalid input" }, { status: 400 });
     }
+
+    if (error instanceof Error) {
+      console.error("[chat] Error:", error.message);
+    } else {
+      console.error("[chat] Unknown error:", error);
+    }
+
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

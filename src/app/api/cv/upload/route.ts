@@ -44,10 +44,9 @@ async function generateThumbnail(pdfPath: string, outputPath: string): Promise<b
       height: 280,
     });
 
-    const result = await convert(1, { responseType: 'image' });
-    // Check if the output file exists as a success indicator
+    await convert(1, { responseType: 'image' }); // we don't need the result, so just await
     return fs.existsSync(outputPath);
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Thumbnail generation failed:', error);
     return false;
   }
@@ -88,7 +87,7 @@ async function sendNotificationEmail(userEmail: string, cvName: string) {
 
     await transporter.sendMail(mailOptions);
     console.log(`Notification email sent to ${userEmail}`);
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Failed to send notification email:', error);
   }
 }
@@ -147,8 +146,12 @@ export async function POST(req: NextRequest) {
       hasThumbnail: thumbnailGenerated,
     }, { status: 201 });
 
-  } catch (err: any) {
-    console.error('Upload error:', err?.message || err);
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error('Upload error:', err.message);
+    } else {
+      console.error('Upload error:', err);
+    }
     return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
   }
 }

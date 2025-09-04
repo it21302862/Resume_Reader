@@ -4,8 +4,6 @@ import fs from "fs";
 import path from "path";
 import pdfParsePromise from "pdf-parse/lib/pdf-parse.js";
 
-const filePathToTextCache: Map<string, string> = new Map();
-
 function normalizeWhitespace(text: string): string {
   return text
     .replace(/[\t\r]+/g, " ")

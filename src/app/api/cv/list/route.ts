@@ -56,8 +56,12 @@ export async function GET(req: NextRequest) {
       if (fs.existsSync(metadataPath)) {
         try {
           metadata = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
-        } catch (e) {
-          console.error('Failed to parse metadata for', id, e);
+        } catch (e: unknown) {
+          if (e instanceof Error) {
+            console.error(`Failed to parse metadata for ${id}: ${e.message}`);
+          } else {
+            console.error(`Failed to parse metadata for ${id}:`, e);
+          }
         }
       }
 
