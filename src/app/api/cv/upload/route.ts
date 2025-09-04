@@ -2,7 +2,6 @@
 import fs from 'fs';
 import path from 'path';
 import nodemailer from 'nodemailer';
-import { fromPath } from 'pdf2pic';
 
 const CV_DIR = path.join(process.cwd(), 'public', 'cvs');
 const MAX_SIZE_BYTES = 10 * 1024 * 1024; // 10MB
@@ -35,6 +34,8 @@ function ensureDir() {
 
 async function generateThumbnail(pdfPath: string, outputPath: string): Promise<boolean> {
   try {
+    // Lazy import pdf2pic to avoid bundling gm during build
+    const { fromPath } = await import('pdf2pic');
     const convert = fromPath(pdfPath, {
       density: 100,
       saveFilename: path.parse(outputPath).name,
