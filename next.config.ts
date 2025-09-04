@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  missingSuspenseWithCSRBailout: false,
 };
 
 export default nextConfig;
