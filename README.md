@@ -60,8 +60,7 @@ EMAIL_USER=your_email@gmail.com
 EMAIL_PASS=your_email_password
 
 # Clone the repo
-git clone https://github.com/yourusername/mcp-server.git
-cd mcp-server
+git clone https://github.com/it21302862/Resume_Reader.git
 
 # Install dependencies
 npm install
