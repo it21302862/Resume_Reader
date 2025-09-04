@@ -210,6 +210,7 @@ export default function CvLibraryPage() {
                       style={{
                         background: 'white',
                         border: '1px solid rgba(148,163,184,.4)',
+                        color: '#374151',
                       }}
                     >
                       Preview
