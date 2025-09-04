@@ -1,5 +1,5 @@
 ﻿import { Suspense } from 'react';
-import HomeClient from './componenets/HomeClient';
+import HomeClient from './component/HomeClient';
 import { use } from 'react';
 export const dynamic = 'force-dynamic';
 

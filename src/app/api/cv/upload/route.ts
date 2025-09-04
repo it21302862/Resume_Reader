@@ -34,11 +34,9 @@ function ensureDir() {
 
 async function generateThumbnail(pdfPath: string, outputPath: string): Promise<boolean> {
   try {
-    // Skip thumbnail generation on Vercel/production to avoid native deps
     if (process.env.VERCEL === '1' || process.env.DISABLE_THUMBNAIL === '1') {
       return false;
     }
-    // Lazy import pdf2pic to avoid bundling gm during build
     const { fromPath } = await import('pdf2pic');
     const convert = fromPath(pdfPath, {
       density: 100,
@@ -49,7 +47,7 @@ async function generateThumbnail(pdfPath: string, outputPath: string): Promise<b
       height: 280,
     });
 
-    await convert(1, { responseType: 'image' }); // we don't need the result, so just await
+    await convert(1, { responseType: 'image' }); 
     return fs.existsSync(outputPath);
   } catch (error: unknown) {
     console.error('Thumbnail generation failed:', error);
