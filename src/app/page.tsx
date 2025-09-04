@@ -1,17 +1,14 @@
-﻿'use client'
-
-import { Suspense } from 'react';
+﻿import { Suspense } from 'react';
 import HomeClient from './componenets/HomeClient';
-
+import { use } from 'react';
 export const dynamic = 'force-dynamic';
 
 function HomeClientFallback() {
   return <div>Loading...</div>;
 }
 
-export default async function Page({ searchParams }: { searchParams: Promise<{ cv?: string }> }) {
-  const { cv = '' } = await searchParams;
-  const selectedCv = cv || '';
+export default function Page({ searchParams }: { searchParams: { cv?: string } }) {
+  const selectedCv = searchParams?.cv || '';
   return (
     <Suspense fallback={<HomeClientFallback />}>
       <HomeClient selectedCv={selectedCv} />

@@ -1,11 +1,8 @@
-// components/HomeClient.tsx
 'use client';
-
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 export default function HomeClient({ selectedCv = '' }: { selectedCv?: string }) {
-
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
   const [chatLoading, setChatLoading] = useState(false);
@@ -79,7 +76,8 @@ export default function HomeClient({ selectedCv = '' }: { selectedCv?: string })
             </button>
             {answer && (
               <div className="mt-2 rounded-md border border-slate-200/60 bg-white/70 p-3 text-slate-800">
-                <span className="font-medium">Answer: </span>{answer}
+                <span className="font-medium">Answer: </span>
+                {answer}
               </div>
             )}
           </div>
