@@ -7,8 +7,9 @@ function HomeClientFallback() {
   return <div>Loading...</div>;
 }
 
-export default function Page({ searchParams }: { searchParams: { cv?: string } }) {
-  const selectedCv = searchParams?.cv || '';
+export default async function Page({ searchParams }: { searchParams: Promise<{ cv?: string }> }) {
+  const { cv = '' } = await searchParams;
+  const selectedCv = cv || '';
   return (
     <Suspense fallback={<HomeClientFallback />}>
       <HomeClient selectedCv={selectedCv} />

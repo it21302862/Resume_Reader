@@ -145,11 +145,11 @@ export async function POST(req: NextRequest) {
     // Send notification email
     await sendNotificationEmail(userEmail, `${safeId}.pdf`);
 
-    return NextResponse.json({
-      id: safeId,
-      name: `${safeId}.pdf`,
-      hasThumbnail: thumbnailGenerated,
-    }, { status: 201 });
+    const res = NextResponse.json({ id: safeId, name: `${safeId}.pdf`, hasThumbnail: thumbnailGenerated }, { status: 201 });
+    res.headers.set('Cache-Control', 'no-store');
+    res.headers.set('X-Content-Type-Options', 'nosniff');
+    res.headers.set('Referrer-Policy', 'no-referrer');
+    return res;
 
   } catch (err: unknown) {
     if (err instanceof Error) {
