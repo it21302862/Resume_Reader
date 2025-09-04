@@ -52,7 +52,7 @@ export async function GET(req: NextRequest) {
 
       // Metadata
       const metadataPath = path.join(CV_DIR, `${id}.json`);
-      let metadata: Record<string, any> = {};
+      let metadata: Record<string, unknown> = {};
       if (fs.existsSync(metadataPath)) {
         try {
           metadata = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
