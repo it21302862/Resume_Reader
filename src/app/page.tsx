@@ -6,15 +6,14 @@ import { useSearchParams } from 'next/navigation';
 
 export default function Home() {
   const params = useSearchParams();
-  const selectedCv = params.get('cv') || '';
+  const selectedCv = params?.get('cv') || '';
 
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
   const [chatLoading, setChatLoading] = useState(false);
 
   useEffect(() => {
-    // Clear previous answer when CV changes
-    setAnswer('');
+    setAnswer(''); // Clear previous answer when CV changes
   }, [selectedCv]);
 
   const handleChat = async () => {
@@ -32,7 +31,7 @@ export default function Home() {
       });
       const data = await res.json();
       setAnswer(data.answer || data.error || 'No answer');
-    } catch (_error) { // prefixed with _ to avoid ESLint warning
+    } catch (_error) {
       setAnswer('Error occurred');
     } finally {
       setChatLoading(false);
@@ -79,7 +78,7 @@ export default function Home() {
               disabled={chatLoading}
               className="btn btn-primary w-full sm:w-auto"
             >
-              {chatLoading ? 'Asking' : 'Ask'}
+              {chatLoading ? 'Asking...' : 'Ask'}
             </button>
             {answer && (
               <div className="mt-2 rounded-md border border-slate-200/60 bg-white/70 p-3 text-slate-800">
@@ -90,7 +89,7 @@ export default function Home() {
         </section>
 
         <footer className="mt-10 text-center text-sm text-slate-500">
-          Built with Next.js  Secure by default
+          Built with Next.js — Secure by default
         </footer>
       </main>
     </div>
