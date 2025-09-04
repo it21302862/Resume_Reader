@@ -9,10 +9,11 @@ function HomeClientFallback() {
   return <div>Loading...</div>;
 }
 
-export default function Page() {
+export default function Page({ searchParams }: { searchParams: { cv?: string } }) {
+  const selectedCv = searchParams?.cv || '';
   return (
     <Suspense fallback={<HomeClientFallback />}>
-      <HomeClient />
+      <HomeClient selectedCv={selectedCv} />
     </Suspense>
   );
 }

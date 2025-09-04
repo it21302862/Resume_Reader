@@ -3,11 +3,8 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 
-export default function HomeClient() {
-  const searchParams = useSearchParams();
-  const selectedCv = searchParams?.get('cv') || '';
+export default function HomeClient({ selectedCv = '' }: { selectedCv?: string }) {
 
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
