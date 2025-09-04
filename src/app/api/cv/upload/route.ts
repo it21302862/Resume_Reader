@@ -34,6 +34,10 @@ function ensureDir() {
 
 async function generateThumbnail(pdfPath: string, outputPath: string): Promise<boolean> {
   try {
+    // Skip thumbnail generation on Vercel/production to avoid native deps
+    if (process.env.VERCEL === '1' || process.env.DISABLE_THUMBNAIL === '1') {
+      return false;
+    }
     // Lazy import pdf2pic to avoid bundling gm during build
     const { fromPath } = await import('pdf2pic');
     const convert = fromPath(pdfPath, {
